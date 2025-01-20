@@ -13,7 +13,7 @@ type Config struct {
 }
 
 type Server struct {
-	Port string `yaml:"port"`
+	Port string `yaml:"port" env:"SERVER_PORT" env-required:"true"`
 }
 
 type Database struct {
@@ -21,7 +21,7 @@ type Database struct {
 }
 
 type LocalJSONConfig struct {
-	Path string `yaml:"path"`
+	Path string `yaml:"path" env:"LOCAL_JSON_PATH" env-required:"true"`
 }
 
 type EmailConfig struct {

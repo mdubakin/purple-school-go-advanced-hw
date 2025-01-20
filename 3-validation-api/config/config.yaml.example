@@ -1,0 +1,12 @@
+server:
+  port: "8088"
+
+database:
+  local-json:
+    path: ./data/data.json
+
+email:
+  login: nice_login
+  password: some_cool_pass
+  smtp_host: smtp.yandex.ru
+  smtp_port: "465"

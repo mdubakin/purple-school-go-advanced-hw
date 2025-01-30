@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_purple_order
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: order
+    volumes:
+      - postgres_data_purple_order:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data_purple_order:

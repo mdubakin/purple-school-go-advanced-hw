@@ -2,10 +2,8 @@ package main
 
 import (
 	"orderapi/config"
-	"orderapi/internal/cart"
 	"orderapi/internal/database"
-	"orderapi/internal/product"
-	"orderapi/internal/user"
+	"orderapi/internal/model"
 )
 
 func main() {
@@ -17,8 +15,8 @@ func main() {
 	}
 
 	db.AutoMigrate(
-		&user.User{},
-		&product.Product{},
-		&cart.Cart{},
+		&model.Cart{},
+		&model.User{},
+		&model.Product{},
 	)
 }

@@ -1,18 +1,19 @@
-package product
+package rest
 
 import (
 	"fmt"
 	"net/http"
+	"orderapi/internal/usecase"
 	"orderapi/pkg/request"
 	"orderapi/pkg/response"
 	"strconv"
 )
 
 type ProductHandler struct {
-	*ProductService
+	*usecase.ProductService
 }
 
-func NewProductHandler(router *http.ServeMux, productService *ProductService) {
+func NewProductHandler(router *http.ServeMux, productService *usecase.ProductService) {
 	p := ProductHandler{ProductService: productService}
 	router.HandleFunc("GET /product/{id}", p.GetByID)
 	router.HandleFunc("POST /product", p.Create)

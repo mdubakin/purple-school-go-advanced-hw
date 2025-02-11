@@ -2,7 +2,7 @@ package main
 
 import (
 	"orderapi/config"
-	"orderapi/internal/database"
+	"orderapi/internal/controller/database"
 	"orderapi/internal/model"
 )
 

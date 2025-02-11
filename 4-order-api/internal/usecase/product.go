@@ -1,16 +1,17 @@
-package product
+package usecase
 
 import (
 	"orderapi/internal/model"
+	repository "orderapi/internal/repository"
 
 	"gorm.io/gorm"
 )
 
 type ProductService struct {
-	*ProductRepository
+	*repository.ProductRepository
 }
 
-func NewProductService(productRepo *ProductRepository) *ProductService {
+func NewProductService(productRepo *repository.ProductRepository) *ProductService {
 	return &ProductService{ProductRepository: productRepo}
 }
 

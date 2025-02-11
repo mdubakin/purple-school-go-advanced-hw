@@ -4,8 +4,11 @@ import (
 	"log"
 	"net/http"
 	"orderapi/config"
-	"orderapi/internal/database"
-	"orderapi/internal/product"
+	"orderapi/internal/controller/database"
+	"orderapi/internal/controller/middleware"
+	"orderapi/internal/controller/rest"
+	repository "orderapi/internal/repository"
+	"orderapi/internal/usecase"
 )
 
 func Run(cfg *config.Config) {
@@ -17,16 +20,23 @@ func Run(cfg *config.Config) {
 	router := http.NewServeMux()
 
 	// repos
-	productRepo := product.NewProductRepository(db)
+	productRepo := repository.NewProductRepository(db)
 
 	// services
-	productService := product.NewProductService(productRepo)
+	productService := usecase.NewProductService(productRepo)
 
 	// handlers
-	product.NewProductHandler(router, productService)
+	rest.NewProductHandler(router, productService)
+
+	chain := middleware.Chain(middleware.WithJSONLogs)
+
+	server := http.Server{
+		Addr:    ":" + cfg.Server.Port,
+		Handler: chain(router),
+	}
 
 	log.Println("Сервер инициализирован и работает по адресу localhost:" + cfg.Server.Port)
-	if err := http.ListenAndServe("localhost:"+cfg.Server.Port, router); err != nil {
+	if err := server.ListenAndServe(); err != nil {
 		panic(err)
 	}
 }

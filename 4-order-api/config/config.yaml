@@ -1,0 +1,10 @@
+server:
+  port: "8088"
+
+database:
+  postgres:
+    dbname: "order"
+    host: "localhost"
+    port: "5432"
+    user: "user"
+    password: "password"
